@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg py-3">
+    <div class="pe-lg-0 ps-lg-5 container-fluid justify-content-between">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="assets/img/logo.png" height="60" alt="logo" class="me-2">
+            <span class="app-name">
+                <span class="app-name-r">R</span><span class="app-name-awl">AWL</span>
+            </span>
+        </a>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <div class="nav_left d-lg-flex align-items-center">
+                <nav>
+                    <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-link" routerLink="/home" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            Home
+                        </a>
+                        <a class="nav-link" routerLink="/mapa" routerLinkActive="active">
+                            Mapa
+                        </a>
+                        <a class="nav-link" routerLink="/full-calendar" routerLinkActive="active">
+                            Full Calendar
+                        </a>
+                        <a class="nav-link" routerLink="/graficos" routerLinkActive="active">
+                            Gráficos
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</nav>
