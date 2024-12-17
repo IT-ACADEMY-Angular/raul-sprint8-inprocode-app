@@ -23,13 +23,7 @@ $ git clone https://github.com/IT-ACADEMY-Angular/raul-sprint7-star-wars-app.git
 $ git remote rm origin
 ```
 
-3. Instalar las dependencias con npm (primero instalamos las del frontend y luego als del backend)
-
-+ En terminal, entramos en la carpeta de -> frontend <- y hacemos el comando:
-
-```bash
-$ npm install
-```
+3. Instalar las dependencias con npm. Primero instalamos y iniciamos el Backend:
 
 + En terminal, entramos en la carpeta de -> server <- y hacemos el comando:
 
@@ -37,7 +31,23 @@ $ npm install
 $ npm run setup
 ```
 
-4. Inicializar el servidor para ver la web, desde terminal en la carpeta frontend
++ Una vez instaladas, iniciamos el servidor backend utilizando los comandos (utiliza dos terminales, sin cerrarlas, para que el backend siga funcionando):
+
+```bash
+$ npx nodemon dist/index.js
+```
+
+```bash
+$ npx tsc --watch
+```
+
+4. Ahora vamos a instalar y iniciar el FrontEnd. En terminal, entramos en la carpeta de -> frontend <- y hacemos el comando:
+
+```bash
+$ npm install
+```
+
++ Inicializar el servidor FronetEnd para ver la web, desde terminal en la carpeta frontend
 
 ```bash
 $ ng serve -o
