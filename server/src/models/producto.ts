@@ -14,6 +14,9 @@ const Producto = db.define('Producto', {
     stock: {
         type: DataTypes.NUMBER
     },
+}, {
+    createdAt: false,
+    updatedAt: false
 });
 
 export default Producto;
