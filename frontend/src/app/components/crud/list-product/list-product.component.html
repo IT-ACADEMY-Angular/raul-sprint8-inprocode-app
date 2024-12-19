@@ -6,7 +6,7 @@
     <button type="button" class="btn btn-primary" routerLink="/add">Agregar Producto</button>
   </div>
 
-  <table class="table table-hover">
+  <table *ngIf="listProducts.length > 0" class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Nombre</th>
@@ -29,4 +29,5 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="mt-5 text-center" *ngIf="listProducts.length == 0">No hay productos que mostrar!</h5>
 </div>

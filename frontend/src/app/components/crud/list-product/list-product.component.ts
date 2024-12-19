@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 import { ProgressBarComponent } from '../../../shared/progress-bar/progress-bar.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'list-product-component',
@@ -15,7 +16,7 @@ export class ListProductComponent implements OnInit {
   listProducts: Product[] = []
   loading: boolean = false
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getListProducts()
@@ -33,6 +34,7 @@ export class ListProductComponent implements OnInit {
     this.loading = true;
     this.productService.deleteProduct(id).subscribe(() => {
       this.getListProducts();
+      this.toastr.warning('Producto eliminado correctamente!', 'Producto eliminado.');
     })
     
   }
