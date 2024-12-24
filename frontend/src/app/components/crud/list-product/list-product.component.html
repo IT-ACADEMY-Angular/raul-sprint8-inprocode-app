@@ -28,10 +28,9 @@
   </table>
 
 </div>
-<h5 class="my-5 text-center" *ngIf="listProducts.length == 0">{{msgNoItems}}</h5>
+<h5 *ngIf="listProducts.length == 0" class="my-5 text-center">{{msgNoItems}}</h5>
 
 <div class="d-flex justify-content-center align-items-center py-3">
-  <button type="button" class="btn btn-primary" routerLink="/add">Comprar Producto</button>
-  <button type="button" class="btn btn-success" (click)="downloadCSV()">Descargar CSV</button>
-
+  <button type="button" class="btn btn-primary mx-3" routerLink="/add">Comprar Producto</button>
+  <button *ngIf="listProducts.length > 0" type="button" class="btn btn-success" (click)="downloadCSV()">Descargar CSV</button>
 </div>
