@@ -40,4 +40,34 @@ export class ListProductComponent implements OnInit {
       this.toastr.warning(`Producto eliminado correctamente!`, 'Producto eliminado.');
     })
   }
+
+  downloadCSV() {
+    const csvData = this.convertToCSV(this.listProducts);
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'productos.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  convertToCSV(products: Product[]): string {
+    const headers = ['Nombre', 'Características', 'Precio', 'Stock'];
+    const rows = products.map(product => [
+      product.name,
+      product.description,
+      product.price,
+      product.stock
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.join(','))
+    ].join('\n');
+
+    return csvContent;
+  }
 }
