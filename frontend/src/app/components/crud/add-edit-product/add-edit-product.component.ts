@@ -17,7 +17,7 @@ export class AddEditProductComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   id: number;
-  operacion: string = 'Agregar '
+  operacion: string = 'Comprar '
 
   constructor(private fb: FormBuilder,
     private productService: ProductService,
@@ -64,22 +64,20 @@ export class AddEditProductComponent implements OnInit {
     this.loading = true;
 
     if (this.id !== 0) {
-      //EDITAR
+      //EDITAR PRODUCTO
       product.id = this.id;
       this.productService.updateProduct(this.id, product).subscribe(() => {
-        this.toastr.info(`El producto ${product.name} fué actualizado correctamente`, 'Producto actualizado!')
+        this.toastr.info(`El producto [ ${product.name} ] fué actualizado correctamente.`, 'Producto actualizado!')
         this.loading = false;
         this.router.navigate(['/'])
       })
     } else {
-      //AGREGAR
+      //COMPRAR PRODUCTO
       this.productService.saveProduct(product).subscribe(() => {
-        this.toastr.success(`El producto ${product.name} fué registrado correctamente`, 'Producto registrado!')
+        this.toastr.success(`El producto [ ${product.name} ] fué comprado correctamente.`, 'Producto comprado!')
         this.loading = false;
         this.router.navigate(['/'])
       })
     }
-
-
   }
 }

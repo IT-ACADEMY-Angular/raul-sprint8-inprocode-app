@@ -1,36 +1,44 @@
 <progress-bar-component *ngIf="loading"></progress-bar-component>
-<div *ngIf="!loading" class="row mt-1">
-    <div class="col-lg-4 offset-lg-4">
-        <div class="card text-white bg-secondary mb-3" style="max-width: 25rem;">
-            <div class="card-header text-center">{{ operacion }} Producto</div>
-            <div class="card-body">
-                <form [formGroup]="form" (ngSubmit)="addProduct()">
-                    <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
-                    <span *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched" class="text-red">
-                        El campo nombre es <strong>obligatorio</strong>
-                    </span>
-                    <input formControlName="description" type="text" class="form-control mt-2" placeholder="Descripcion">
-                    <span *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched">
-                        El campo descripcion es <strong>obligatorio</strong>
-                    </span>
-                    <input formControlName="price" type="number" class="form-control mt-2" placeholder="Precio">
-                    <span *ngIf="form.get('price')?.hasError('required') && form.get('price')?.touched">
-                        El campo price es <strong>obligatorio</strong>
-                    </span>
-                    <input formControlName="stock" type="number" class="form-control mt-2" placeholder="Stock">
-                    <span *ngIf="form.get('stock')?.hasError('required') && form.get('stock')?.touched">
-                        El campo stock es <strong>obligatorio</strong>
-                    </span>
-                    <div class="row mt-2 text-center">
-                        <div class="col-lg-6">
-                            <button routerLink="/" type="button" class="btn btn-secondary">Volver</button>
-                        </div>
-                        <div class="col-lg-6">
-                            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Aceptar</button>
-                        </div>
-                    </div>
-                </form>
+<div *ngIf="!loading" class="row mt-1 py-5">
+  <div class="custom-width">
+    <div class="card text-white bg-secondary mb-3">
+      <div class="card-header text-center h3">{{ operacion }} Producto</div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="addProduct()">
+          <label *ngIf="operacion === 'Editar '">Nombre</label>
+          <input formControlName="name" type="text" class="form-control" placeholder="Nombre"
+            [class.mt-2]="operacion !== 'Editar '">
+          <span *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched" class="text-red">
+            El campo Nombre es <strong class="text-dark">obligatorio</strong>
+          </span>
+          <label *ngIf="operacion === 'Editar '" class="mt-2">Características</label>
+          <input formControlName="description" type="text" class="form-control mt-2" placeholder="Características"
+            [class.mt-2]="operacion !== 'Editar '">
+          <span *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched">
+            El campo Características es <strong class="text-dark">obligatorio</strong>
+          </span>
+          <label *ngIf="operacion === 'Editar '" class="mt-2">Precio</label>
+          <input formControlName="price" type="number" class="form-control mt-2" placeholder="Precio"
+            [class.mt-2]="operacion !== 'Editar '">
+          <span *ngIf="form.get('price')?.hasError('required') && form.get('price')?.touched">
+            El campo Precio es <strong class="text-dark">obligatorio</strong>
+          </span>
+          <label *ngIf="operacion === 'Editar '" class="mt-2">Stock</label>
+          <input formControlName="stock" type="number" class="form-control mt-2" placeholder="Stock"
+            [class.mt-2]="operacion !== 'Editar '">
+          <span *ngIf="form.get('stock')?.hasError('required') && form.get('stock')?.touched">
+            El campo Stock es <strong class="text-dark">obligatorio</strong>
+          </span>
+          <div class="row mt-2 text-center">
+            <div class="col-lg-6">
+              <button routerLink="/" type="button" class="btn btn-secondary mt-2">Volver</button>
             </div>
-        </div>
+            <div class="col-lg-6">
+              <button [disabled]="form.invalid" type="submit" class="btn btn-primary mt-2">Aceptar</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

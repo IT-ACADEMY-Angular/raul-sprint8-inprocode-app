@@ -1,34 +1,34 @@
 header {
-    background: #9cc3c9;
-    font-family: "Sansita", sans-serif;
+  background: #d7e1f6;
+  font-family: "Sansita", sans-serif;
 }
 
 nav a {
-    color: #444 !important;
-    text-transform: uppercase;
-    font-size: 14px;
-    position: relative;
-    text-decoration: none;
-    display: inline-block;
-    padding-bottom: 4px;
+  color: #444 !important;
+  text-transform: uppercase;
+  font-size: 14px;
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  padding-bottom: 4px;
 }
 
 nav a:hover {
-    color: #000 !important;
+  color: #000 !important;
 }
 
 nav a::before {
-    content: '';
-    display: block;
-    height: 5px;
-    background-color: #444;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0%;
-    transition: all ease-in-out 250ms;
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0%;
+  transition: all ease-in-out 250ms;
 }
 
 nav a:hover::before {
-    width: 100%;
+  width: 100%;
 }

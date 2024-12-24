@@ -1,16 +1,13 @@
 <progress-bar-component *ngIf="loading"></progress-bar-component>
 
 <div *ngIf="!loading" class="container">
-  <div class="title">
-    <h4>Listado de Productos</h4>
-    <button type="button" class="btn btn-primary" routerLink="/add">Agregar Producto</button>
-  </div>
+  <h1 class="text-center py-5 text-secondary">{{tittle}}</h1>
 
   <table *ngIf="listProducts.length > 0" class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Nombre</th>
-        <th scope="col">Descripcion</th>
+        <th scope="col">Características</th>
         <th scope="col">Precio</th>
         <th scope="col">Stock</th>
         <th scope="col"></th>
@@ -18,16 +15,21 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of listProducts" class="table-active">
-        <td>{{ item.name }}</td>
-        <td>{{ item.description }}</td>
+        <td>{{ item.name | capitalize}}</td>
+        <td>{{ item.description | capitalize}}</td>
         <td>{{ item.price | currency }}</td>
         <td>{{ item.stock }}</td>
         <td>
-          <button routerLink="/edit/{{ item.id }}" type="button" class="btn btn-info btn-sm">Edit</button>
-          <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-secondary btn-sm ms-2">Delete</button>
+          <button routerLink="/edit/{{ item.id }}" type="button" class="btn btn-warning btn-sm">Edit</button>
+          <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-danger btn-sm ms-2">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <h5 class="mt-5 text-center" *ngIf="listProducts.length == 0">No hay productos que mostrar!</h5>
+
+</div>
+<h5 class="my-5 text-center" *ngIf="listProducts.length == 0">{{msgNoItems}}</h5>
+
+<div class="d-flex justify-content-center align-items-center py-3">
+  <button type="button" class="btn btn-primary" routerLink="/add">Comprar Producto</button>
 </div>

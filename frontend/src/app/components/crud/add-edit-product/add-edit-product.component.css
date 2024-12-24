@@ -1,0 +1,6 @@
+.custom-width {
+  width: 20%;
+  min-width: 300px;
+  vertical-align: middle;
+  margin: auto;
+}
