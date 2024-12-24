@@ -28,21 +28,23 @@ $ git remote rm origin
 
 4️⃣ Crea una BBDD nueva que se llame "almacen" y importas el archivo .sql que está en el proyecto en la carpeta de "BBDD". Recuerda que debes hacer click en la BBDD y luego importarle el .sql (almenos en PhPMyadmin).
 
-5️⃣ En el archivo dentro de la carpeta server/connection.ts está la configuración para conectarse a la BBDD de tu localhost, en mi caso tengo puesto que la BBDD se llama "almacen", usuario "root" y sin password "". Debes configurarla según tus credenciales en o Workbench PhPMyAdmin.
+5️⃣ En el archivo dentro de la carpeta server/connection.ts está la configuración para conectarse a la BBDD de tu localhost, en mi caso tengo puesto que la BBDD se llama = "almacen", usuario = "root" y sin password = "". Debes configurarla según tus credenciales en o Workbench PhPMyAdmin.
 
 6️⃣ Instalar las dependencias con npm. Primero instalamos y iniciamos el Backend:
 
-+ En terminal, entramos en la carpeta de -> server <- y hacemos el comando:
+🟢 En terminal, entramos en la carpeta de -> server <- y hacemos el comando:
 
 ```bash
 $ npm run setup --force
 ```
 
-+ Una vez instaladas, iniciamos el servidor backend utilizando los comandos (utiliza dos terminales, sin cerrarlas, para que el backend siga funcionando, y sigue el orden!) Si todo ha ido bien, verás un mensaje en terminal "Conectados a la BBDD":
+🟢 Una vez instaladas, iniciamos el servidor backend utilizando los comandos (utiliza dos terminales, sin cerrarlas, para que el backend siga funcionando, y sigue el orden!) Si todo ha ido bien, verás un mensaje en terminal "Conectados a la BBDD":
 
 ```bash
 $ npx tsc --watch
 ```
+
+🟢 Siguiente comando:
 
 ```bash
 $ npx nodemon dist/index.js
@@ -54,7 +56,7 @@ $ npx nodemon dist/index.js
 $ npm install --force
 ```
 
-+ Inicializar el servidor FronetEnd para ver la web, desde terminal en la carpeta frontend
+🟢 Inicializar el servidor FronetEnd para ver la web, desde terminal en la carpeta frontend
 
 ```bash
 $ ng serve -o
@@ -66,10 +68,16 @@ $ ng serve -o
 - TYPESCRIPT
 - HTML
 - CSS
+- BOOTSTRAP
+- BOOTSWATCH
 - RXJS
-- Routes
-- Node
-- Express
+- ROUTES
+- NODE
+- EXPRESS
+- SEQUELIZE
+- XAMPP
+- MYSQL
+- PHPMYADMIN
 
 ## ✨ Características
 
