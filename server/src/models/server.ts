@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import routesProducto from '../routes/producto'
+import locationRoutes from '../routes/locationRoutes';
 import db from '../db/connection'
 
 class Server {
@@ -28,7 +29,9 @@ class Server {
                 msg: 'API Working'
             })
         })
-        this.app.use('/api/productos', routesProducto)
+        this.app.use('/api/productos', routesProducto);
+
+        this.app.use('/api/locations', locationRoutes);
     }
 
     midlewares() {
@@ -41,6 +44,8 @@ class Server {
             await db.authenticate();
             console.log('Conectados a la BBDD.');
 
+            await db.sync({ force: false });
+            console.log('Modelos sincronizados con la base de datos.');
         } catch (error) {
             console.log(error);
             console.log('Error al conectarse a la BBDD.');
