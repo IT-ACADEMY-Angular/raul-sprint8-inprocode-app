@@ -1,22 +1,43 @@
-import { DataTypes } from 'sequelize'
-import db from '../db/connection';
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../db/connection";
 
-const Producto = db.define('Producto', {
+class Producto extends Model {
+  public id!: number;
+  public name!: string;
+  public description!: string;
+  public price!: number;
+  public stock!: number;
+}
+
+Producto.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
     name: {
-        type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     description: {
-        type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     price: {
-        type: DataTypes.DOUBLE
+      type: DataTypes.DOUBLE,
+      allowNull: false,
     },
     stock: {
-        type: DataTypes.NUMBER
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-}, {
-    createdAt: false,
-    updatedAt: false
-});
+  },
+  {
+    sequelize,
+    modelName: "Producto",
+    tableName: "Productos",
+  }
+);
 
 export default Producto;

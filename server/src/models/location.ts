@@ -1,5 +1,5 @@
-import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '../db/connection';
+import { DataTypes, Model, Optional } from "sequelize";
+import sequelize from "../db/connection";
 
 interface LocationAttributes {
   id: number;
@@ -9,9 +9,13 @@ interface LocationAttributes {
   updatedAt?: Date;
 }
 
-interface LocationCreationAttributes extends Optional<LocationAttributes, 'id'> { }
+interface LocationCreationAttributes
+  extends Optional<LocationAttributes, "id"> {}
 
-class Location extends Model<LocationAttributes, LocationCreationAttributes> implements LocationAttributes {
+class Location
+  extends Model<LocationAttributes, LocationCreationAttributes>
+  implements LocationAttributes
+{
   public id!: number;
   public lat!: number;
   public lng!: number;
@@ -37,8 +41,8 @@ Location.init(
   },
   {
     sequelize,
-    modelName: 'Location',
-    tableName: 'locations',
+    modelName: "Location",
+    tableName: "locations",
     timestamps: true,
   }
 );

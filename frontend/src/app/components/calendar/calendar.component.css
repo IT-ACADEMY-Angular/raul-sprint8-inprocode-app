@@ -1,0 +1,14 @@
+:host ::ng-deep .fc-event {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  color: rgb(53, 53, 53);
+  background-color: rgb(220, 221, 255);
+}
+
+:host ::ng-deep .fc {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 10px;
+}

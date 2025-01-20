@@ -8,6 +8,7 @@ Práctica donde el objetivo principal era hacer una App utilizando los plugins m
 
 - Npm instalado en tu sistema.
 - Node instalado en tu sistema.
+- ANGULAR CLI instalado en tu sistema.
 - Visual Studio Code (Recomendado)
 - XAMPP descargado
 
@@ -24,43 +25,43 @@ $ git clone https://github.com/IT-ACADEMY-Angular/raul-sprint8-inprocode-app.git
 $ git remote rm origin
 ```
 
-3️⃣ Abrimos XAMPP: Hacemos Start en APACHE + MYSQL y a continuación abrimos PhPMyAdmin haciendo click en "Admin" en la fila de MYSQL.
+3️⃣ Abrimos MySQL Workbench o PhpMyAdmin, este paso es importante, porque al iniciar el servidor, la base de datos y tablas se crearán dinámicamente.
 
-4️⃣ Crea una BBDD nueva que se llame "almacen" y importas el archivo .sql que está en el proyecto en la carpeta de "BBDD". Recuerda que debes hacer click en la BBDD y luego importarle el .sql (almenos en PhPMyadmin).
+4️⃣ En el archivo dentro de la carpeta server/src/db/connection.ts está la configuración para conectarse a la base de datos de tu localhost, en mi caso tengo puesto que la base de datos se llama = "almacen", usuario = "root" password = "root". Debes configurarla según tus credenciales en Workbench/PhPMyAdmin (user, password).
 
-5️⃣ En el archivo dentro de la carpeta server/connection.ts está la configuración para conectarse a la BBDD de tu localhost, en mi caso tengo puesto que la BBDD se llama = "almacen", usuario = "root" y sin password = "". Debes configurarla según tus credenciales en o Workbench PhPMyAdmin.
+5️⃣ Instala las dependencias con npm (tanto el front como el back). Primero instalamos y iniciamos el Backend:
 
-6️⃣ Instalar las dependencias con npm. Primero instalamos y iniciamos el Backend:
-
-🟢 En terminal, entramos en la carpeta de -> server <- y hacemos el comando:
+🟢 En terminal, entramos en la carpeta de -> server <- (IMPORTANTE!! La instalacion de dependencias de back y front, tiene que ser en sus respectivas carpetas!) hacemos el comando:
 
 ```bash
 $ npm run setup --force
 ```
 
-🟢 Una vez instaladas, iniciamos el servidor backend utilizando los comandos (utiliza dos terminales, sin cerrarlas, para que el backend siga funcionando, y sigue el orden!) Si todo ha ido bien, verás un mensaje en terminal "Conectados a la BBDD":
+🟢 Una vez instaladas, iniciamos el servidor backend utilizando los comandos (utiliza dos terminales, sin cerrarlas, para que el backend siga funcionando, y sigue el orden!):
 
 ```bash
 $ npx tsc --watch
 ```
 
-🟢 Siguiente comando:
+🟢 Siguiente comando (Abre otra terminal, en total tendremos 3, 2 de back y 1 de front). Si todo ha ido bien cuando hagas el siguiente comando, verás un mensaje en terminal "Conectados a la BBDD":
 
 ```bash
 $ npx nodemon dist/index.js
 ```
 
-7️⃣ Ahora vamos a instalar y iniciar el FrontEnd. En terminal, entramos en la carpeta de -> frontend <- y hacemos el comando:
+7️⃣ Ahora vamos a instalar y iniciar el FrontEnd. En otra terminal, entramos en la carpeta de -> frontend <- y hacemos el comando:
 
 ```bash
 $ npm install --force
 ```
 
-🟢 Inicializar el servidor FronetEnd para ver la web, desde terminal en la carpeta frontend
+🟢 Inicializar el servidor FrontEnd para ver la web, desde terminal en la carpeta frontend
 
 ```bash
 $ ng serve -o
 ```
+
+🟢 Ya lo tienes todo LISTO!
 
 ## 💻 Tecnologías y Recursos Utilizados
 

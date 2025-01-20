@@ -11,18 +11,22 @@ import { CapitalizePipe } from '../../../shared/pipes/capitalize.pipe';
   selector: 'list-product-component',
   imports: [CommonModule, RouterLink, ProgressBarComponent, CapitalizePipe],
   templateUrl: './list-product.component.html',
-  styleUrl: './list-product.component.css'
+  styleUrl: './list-product.component.css',
 })
 export class ListProductComponent implements OnInit {
-  listProducts: Product[] = []
-  loading: boolean = false
+  listProducts: Product[] = [];
+  loading: boolean = false;
   tittle: string = 'ALMACÉN WILD TIGER';
-  msgNoItems: string = 'No hay productos en el almacén, anímate y compra alguno!'
+  msgNoItems: string =
+    'No hay productos en el almacén, anímate y compra alguno!';
 
-  constructor(private productService: ProductService, private toastr: ToastrService) { }
+  constructor(
+    private productService: ProductService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.getListProducts()
+    this.getListProducts();
   }
 
   getListProducts() {
@@ -30,20 +34,24 @@ export class ListProductComponent implements OnInit {
     this.productService.getListProducts().subscribe((data: Product[]) => {
       this.listProducts = data;
       this.loading = false;
-    })
+    });
   }
 
   deleteProduct(id: number) {
     this.loading = true;
     this.productService.deleteProduct(id).subscribe(() => {
       this.getListProducts();
-      this.toastr.warning(`Producto eliminado correctamente!`, 'Producto eliminado.');
-    })
+      this.toastr.warning(
+        `Producto eliminado correctamente!`,
+        'Producto eliminado.'
+      );
+    });
   }
 
   downloadCSV() {
     const csvData = this.convertToCSV(this.listProducts);
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const bom = '\uFEFF';
+    const blob = new Blob([bom + csvData], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement('a');
@@ -56,16 +64,16 @@ export class ListProductComponent implements OnInit {
 
   convertToCSV(products: Product[]): string {
     const headers = ['Nombre', 'Características', 'Precio', 'Stock'];
-    const rows = products.map(product => [
+    const rows = products.map((product) => [
       product.name,
       product.description,
       product.price,
-      product.stock
+      product.stock,
     ]);
 
     const csvContent = [
       headers.join(','),
-      ...rows.map(row => row.join(','))
+      ...rows.map((row) => row.join(',')),
     ].join('\n');
 
     return csvContent;
