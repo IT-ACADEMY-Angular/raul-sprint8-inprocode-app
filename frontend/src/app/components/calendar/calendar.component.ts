@@ -5,7 +5,7 @@ import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment'; // Importa la configuración
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'calendar-component',
@@ -29,6 +29,7 @@ export class CalendarComponent {
         html: `<div style="white-space:normal; word-wrap:break-word; text-align:center;"><b>${formattedTitle}</b></div>`,
       };
     },
+    firstDay: 1,
     dayMaxEventRows: true,
     dayMaxEvents: 3,
   };

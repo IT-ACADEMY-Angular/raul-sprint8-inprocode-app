@@ -12,3 +12,11 @@
   margin: 0 auto;
   margin-top: 10px;
 }
+
+:host ::ng-deep .fc-day-sat, .fc-day-sun {
+  background-color: #ffe6e6;
+}
+
+:host ::ng-deep .fc-day-sun {
+  background-color: #ffe6e6;
+}
