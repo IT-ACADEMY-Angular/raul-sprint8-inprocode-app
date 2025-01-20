@@ -1,4 +1,7 @@
 #map {
-  width: 100% !important;
-  height: 100% !important;
+  width: 1500px;
+  height:700px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+
 }

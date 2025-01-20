@@ -4,6 +4,8 @@ import routesProducto from "../routes/productoRoutes";
 import locationRoutes from "../routes/locationRoutes";
 import eventRoutes from "../routes/eventRoutes";
 import db from "../db/connection";
+import chartRoutes from "../routes/chartRoutes";
+import seedChartData from "../scripts/seedData";
 
 class Server {
   private app: Application;
@@ -47,6 +49,7 @@ class Server {
     this.app.use("/api/productos", routesProducto);
     this.app.use("/api/locations", locationRoutes);
     this.app.use("/api/events", eventRoutes);
+    this.app.use("/api/charts", chartRoutes);
 
     this.app.get("/api/config", (req: Request, res: Response) => {
       res.json({
@@ -65,6 +68,13 @@ class Server {
     try {
       await db.authenticate();
       console.log("Conectados a la BBDD.");
+
+      await db.sync({ force: false });
+      console.log("Modelos sincronizados con la base de datos.");
+
+      if (process.env.NODE_ENV !== "production") {
+        await seedChartData();
+      }
     } catch (error) {
       console.error("Error al conectarse a la base de datos:", error);
     }

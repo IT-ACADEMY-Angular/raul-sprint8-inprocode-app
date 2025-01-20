@@ -1,1 +1,45 @@
-<p>chart works!</p>
+<div class="container">
+  <h1 class="text-center py-4 text-secondary">{{ tittle }}</h1>
+
+  <div class="row justify-content-between">
+    <div class="col-md-6 col-lg-6 text-center mb-5 chart-container">
+      <h4>Ventas Mensuales</h4>
+      <canvas
+        baseChart
+        [data]="lineChartData"
+        [type]="'line'"
+        [options]="chartOptions"
+      ></canvas>
+    </div>
+
+    <div class="col-md-6 col-lg-6 text-center mb-5 chart-container">
+      <h4>Distribución por Categoría</h4>
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [type]="'pie'"
+        [options]="chartOptions"
+      ></canvas>
+    </div>
+
+    <div class="col-md-6 col-lg-6 text-center mb-5 chart-container">
+      <h4>Productos Vendidos</h4>
+      <canvas
+        baseChart
+        [data]="barChartData"
+        [type]="'bar'"
+        [options]="chartOptions"
+      ></canvas>
+    </div>
+
+    <div class="col-md-6 col-lg-6 text-center mb-5 chart-container">
+      <h4>Radar de Actividad</h4>
+      <canvas
+        baseChart
+        [data]="radarChartData"
+        [type]="'radar'"
+        [options]="chartOptions"
+      ></canvas>
+    </div>
+  </div>
+</div>

@@ -15,6 +15,8 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent {
+  tittle: string = 'CALENDAR';
+
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     editable: true,

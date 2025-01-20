@@ -1,0 +1,13 @@
+canvas {
+  max-height: 300px;
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  margin: auto;
+}
+
+h4 {
+  font-weight: bolder;
+}
