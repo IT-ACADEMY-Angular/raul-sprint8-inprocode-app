@@ -6,11 +6,9 @@ export const getLocations = async (
   res: Response
 ): Promise<void> => {
   try {
-    await Location.sync();
     const locations = await Location.findAll();
     res.status(200).json(locations);
   } catch (error) {
-    console.error("Error al obtener las localizaciones:", error);
     res.status(500).json({ message: "Error interno del servidor" });
   }
 };
@@ -20,18 +18,33 @@ export const saveLocation = async (
   res: Response
 ): Promise<void> => {
   try {
-    await Location.sync();
-    const { lat, lng } = req.body;
+    const { lat, lng, category, subcategory, name } = req.body;
 
-    if (!lat || !lng) {
-      res.status(400).json({ message: "Latitud y longitud son requeridas" });
+    if (!name || typeof name !== "string" || name.length > 20) {
+      res.status(400).json({
+        message:
+          "El nombre del sitio es requerido y debe tener máximo 20 caracteres",
+      });
       return;
     }
 
-    const location = await Location.create({ lat, lng });
+    if (!lat || !lng || !category || !subcategory) {
+      res.status(400).json({
+        message:
+          "Latitud, longitud, categoría, subcategoría y nombre son requeridas",
+      });
+      return;
+    }
+
+    const location = await Location.create({
+      lat,
+      lng,
+      category,
+      subcategory,
+      name,
+    });
     res.status(201).json(location);
   } catch (error) {
-    console.error("Error al guardar la localización:", error);
     res.status(500).json({ message: "Error interno del servidor" });
   }
 };

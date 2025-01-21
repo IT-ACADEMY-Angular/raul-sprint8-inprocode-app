@@ -1,5 +1,160 @@
-<h1 class="text-center py-4 text-secondary">{{ tittle }}</h1>
+<h1 class="text-center py-4 text-secondary">Mapa</h1>
 
-<div class="container d-flex justify-content-center align-items-center">
-  <div id="map"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+          <h5 class="mb-0">Filtrar Categorías</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-check mb-3">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="selectAll"
+              [checked]="areAllCategoriesSelected()"
+              [indeterminate]="isIndeterminate()"
+              (change)="toggleSelectAll($event)"
+            />
+            <label class="form-check-label fw-bold" for="selectAll">
+              {{
+                areAllCategoriesSelected()
+                  ? "Deseleccionar Todo"
+                  : "Seleccionar Todo"
+              }}
+            </label>
+          </div>
+
+          <div
+            class="form-check"
+            *ngFor="let category of categories; trackBy: trackByCategoryName"
+          >
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [id]="category.name"
+              [value]="category.name"
+              [checked]="visibleCategories.has(category.name)"
+              (change)="toggleCategoryFilter(category.name)"
+            />
+            <label class="form-check-label" [for]="category.name">
+              {{ category.name }}
+              <span class="counter"
+                >({{ categoryCounts[category.name] || 0 }})</span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div
+        id="map"
+        class="border rounded"
+        style="width: 100%; height: 500px"
+      ></div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="categorySelectorModal"
+  class="modal fade show d-block"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="isCategorySelectorOpen"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Seleccione Categoría, Subcategoría y Nombre del Sitio
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeCategorySelector()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #markerForm="ngForm">
+          <div class="form-group">
+            <label for="category" class="fw-bold pb-1">Categoría</label>
+            <select
+              id="category"
+              class="form-select"
+              [(ngModel)]="selectedCategory"
+              name="category"
+              required
+            >
+              <option [value]="null" disabled>Seleccione una categoría</option>
+              <option
+                *ngFor="let category of categories"
+                [value]="category.name"
+              >
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group mt-3" *ngIf="selectedCategory">
+            <label for="subcategory" class="fw-bold pb-1">Subcategoría</label>
+            <select
+              id="subcategory"
+              class="form-select"
+              [(ngModel)]="selectedSubcategory"
+              name="subcategory"
+              required
+            >
+              <option [value]="null" disabled>
+                Seleccione una subcategoría
+              </option>
+              <option
+                *ngFor="
+                  let subcategory of getSubcategoriesForSelectedCategory()
+                "
+                [value]="subcategory"
+              >
+                {{ subcategory }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group mt-3" *ngIf="selectedCategory">
+            <label for="siteName" class="fw-bold pb-1">Nombre del Sitio</label>
+            <input
+              type="text"
+              id="siteName"
+              class="form-control"
+              [(ngModel)]="siteName"
+              name="siteName"
+              maxlength="20"
+              required
+              placeholder="Nombre del Sitio"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addMarker(markerForm)"
+          [disabled]="!markerForm.form.valid"
+        >
+          Añadir Marcador
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeCategorySelector()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

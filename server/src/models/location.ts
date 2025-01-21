@@ -5,6 +5,9 @@ interface LocationAttributes {
   id: number;
   lat: number;
   lng: number;
+  category: string;
+  subcategory: string;
+  name: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -19,6 +22,9 @@ class Location
   public id!: number;
   public lat!: number;
   public lng!: number;
+  public category!: string;
+  public subcategory!: string;
+  public name!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -37,6 +43,22 @@ Location.init(
     lng: {
       type: DataTypes.FLOAT,
       allowNull: false,
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    subcategory: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        len: [1, 20],
+      },
     },
   },
   {
