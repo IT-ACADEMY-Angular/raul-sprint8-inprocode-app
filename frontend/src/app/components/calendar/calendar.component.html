@@ -1,5 +1,126 @@
 <h1 class="text-center py-4 text-secondary">{{ tittle }}</h1>
 
-<div>
-  <full-calendar [options]="calendarOptions"></full-calendar>
+<div class="calendar-container">
+  <full-calendar #calendar [options]="calendarOptions"></full-calendar>
 </div>
+
+<ng-template #editEventModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editEventModalLabel">Editar Evento</h5>
+    <button
+      type="button"
+      class="btn-close btn-close-custom"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <form #editEventForm="ngForm" (ngSubmit)="submitEditEvent()">
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="eventTitle" class="form-label fw-bold"
+          >Título del Evento</label
+        >
+        <input
+          type="text"
+          id="eventTitle"
+          class="form-control"
+          [(ngModel)]="editableEventTitle"
+          name="eventTitle"
+          required
+          maxlength="20"
+        />
+        <div
+          *ngIf="
+            editEventForm.controls['eventTitle']?.invalid &&
+            (editEventForm.controls['eventTitle']?.dirty ||
+              editEventForm.controls['eventTitle']?.touched)
+          "
+          class="text-danger"
+        >
+          El título es requerido y no puede exceder los 20 caracteres.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="eventDate" class="form-label fw-bold"
+          >Fecha del Evento</label
+        >
+        <input
+          type="date"
+          id="eventDate"
+          class="form-control"
+          [(ngModel)]="editableEventDate"
+          name="eventDate"
+          required
+        />
+        <div
+          *ngIf="
+            editEventForm.controls['eventDate']?.invalid &&
+            (editEventForm.controls['eventDate']?.dirty ||
+              editEventForm.controls['eventDate']?.touched)
+          "
+          class="text-danger"
+        >
+          La fecha es requerida.
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.dismiss('Cancel click')"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-danger-custom"
+        (click)="openDeleteConfirmModal()"
+      >
+        Eliminar Evento
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="editEventForm.form.invalid"
+      >
+        Guardar Cambios
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #deleteConfirmModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="deleteConfirmModalLabel">
+      Confirmar Eliminación
+    </h5>
+    <button
+      type="button"
+      class="btn-close btn-close-custom"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>¿Estás seguro de que deseas eliminar este evento?</p>
+    <p>
+      <strong>{{ editableEventTitle }}</strong> en
+      <strong>{{ editableEventDate }}</strong>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.dismiss('Cancel click')"
+    >
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="confirmDeleteEvent()">
+      Eliminar
+    </button>
+  </div>
+</ng-template>

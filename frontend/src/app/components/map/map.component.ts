@@ -9,7 +9,6 @@ import mapboxgl, {
 import { environment } from '../../../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { Category, CategoriesService } from '../../services/categories.service';
 
 @Component({
@@ -19,6 +18,7 @@ import { Category, CategoriesService } from '../../services/categories.service';
   styleUrl: './map.component.css',
 })
 export class MapComponent {
+  tittle: string = 'MAPA';
   map!: mapboxgl.Map;
   markers: {
     marker: mapboxgl.Marker;
