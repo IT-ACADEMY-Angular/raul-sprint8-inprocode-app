@@ -9,7 +9,7 @@ const dbConfig = {
   dialect: "mysql",
 };
 
-const ensureDatabaseExists = async () => {
+export const ensureDatabaseExists = async () => {
   try {
     const connection = await mysql.createConnection({
       host: dbConfig.host,
@@ -23,7 +23,7 @@ const ensureDatabaseExists = async () => {
     );
     if (databases.length === 0) {
       console.log(`La base de datos '${dbName}' no existe. Creándola...`);
-      await connection.query(`CREATE DATABASE ${dbName}`);
+      await connection.query(`CREATE DATABASE \`${dbName}\``);
       console.log(`Base de datos '${dbName}' creada exitosamente.`);
     } else {
       console.log(`La base de datos '${dbName}' ya existe.`);
@@ -36,14 +36,11 @@ const ensureDatabaseExists = async () => {
   }
 };
 
-(async () => {
-  await ensureDatabaseExists();
-})();
-
-const sequelize = new Sequelize(dbName, dbConfig.user, dbConfig.password, {
-  host: dbConfig.host,
-  dialect: dbConfig.dialect as "mysql",
-  logging: false,
-});
-
-export default sequelize;
+export const createSequelize = () => {
+  const sequelize = new Sequelize(dbName, dbConfig.user, dbConfig.password, {
+    host: dbConfig.host,
+    dialect: dbConfig.dialect as "mysql",
+    logging: false,
+  });
+  return sequelize;
+};

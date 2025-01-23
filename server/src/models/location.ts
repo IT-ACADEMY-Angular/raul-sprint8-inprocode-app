@@ -1,5 +1,4 @@
-import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../db/connection";
+import { DataTypes, Model, Optional, Sequelize } from "sequelize";
 
 interface LocationAttributes {
   id: number;
@@ -15,7 +14,7 @@ interface LocationAttributes {
 interface LocationCreationAttributes
   extends Optional<LocationAttributes, "id"> {}
 
-class Location
+export class Location
   extends Model<LocationAttributes, LocationCreationAttributes>
   implements LocationAttributes
 {
@@ -25,48 +24,50 @@ class Location
   public category!: string;
   public subcategory!: string;
   public name!: string;
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-Location.init(
-  {
-    id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    lat: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    lng: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    subcategory: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    name: {
-      type: DataTypes.STRING(20),
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        len: [1, 20],
+export const initLocationModel = (sequelize: Sequelize) => {
+  Location.init(
+    {
+      id: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+      },
+      lat: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      lng: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      subcategory: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      name: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          len: [1, 20],
+        },
       },
     },
-  },
-  {
-    sequelize,
-    modelName: "Location",
-    tableName: "locations",
-    timestamps: true,
-  }
-);
-
-export default Location;
+    {
+      sequelize,
+      modelName: "Location",
+      tableName: "locations",
+      timestamps: true,
+    }
+  );
+};

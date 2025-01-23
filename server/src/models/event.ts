@@ -1,5 +1,4 @@
-import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../db/connection";
+import { DataTypes, Model, Optional, Sequelize } from "sequelize";
 
 interface EventAttributes {
   id: number;
@@ -12,7 +11,7 @@ interface EventAttributes {
 interface EventCreationAttributes
   extends Optional<EventAttributes, "id" | "end"> {}
 
-class Event
+export class Event
   extends Model<EventAttributes, EventCreationAttributes>
   implements EventAttributes
 {
@@ -26,35 +25,38 @@ class Event
   public readonly updatedAt!: Date;
 }
 
-Event.init(
-  {
-    id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      autoIncrement: true,
-      primaryKey: true,
+export const initEventModel = (sequelize: Sequelize) => {
+  Event.init(
+    {
+      id: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+      },
+      title: {
+        type: new DataTypes.STRING(128),
+        allowNull: false,
+      },
+      start: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      allDay: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
+      end: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
-    title: {
-      type: new DataTypes.STRING(128),
-      allowNull: false,
-    },
-    start: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    allDay: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true,
-    },
-    end: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-  },
-  {
-    tableName: "events",
-    sequelize,
-  }
-);
-
-export default Event;
+    {
+      tableName: "events",
+      sequelize,
+      modelName: "Event",
+      timestamps: true,
+    }
+  );
+};

@@ -3,18 +3,24 @@ import cors from "cors";
 import routesProducto from "../routes/productoRoutes";
 import locationRoutes from "../routes/locationRoutes";
 import eventRoutes from "../routes/eventRoutes";
-import db from "../db/connection";
 import chartRoutes from "../routes/chartRoutes";
 import seedChartData from "../scripts/seedData";
+import { Sequelize } from "sequelize";
+import { initializeModels, models } from "../models";
 
 class Server {
   private app: Application;
   private port: string;
+  private db: Sequelize;
 
-  constructor() {
+  constructor(sequelize: Sequelize) {
     this.app = express();
     this.port = process.env.PORT || "3001";
-    this.midlewares();
+    this.db = sequelize;
+
+    initializeModels(this.db);
+
+    this.middlewares();
     this.routes();
     this.dbConnect();
   }
@@ -25,16 +31,18 @@ class Server {
 
   listen() {
     const server = this.app.listen(this.port, () => {
-      console.log(`Application working on port ${this.port}`);
+      console.log(`Aplicación funcionando en el puerto ${this.port}`);
     });
 
     server.on("error", (err: NodeJS.ErrnoException) => {
       if (err.code === "EADDRINUSE") {
-        console.error(`Port ${this.port} is in use. Trying another port...`);
+        console.error(
+          `El puerto ${this.port} está en uso. Intentando con otro puerto...`
+        );
         this.port = (parseInt(this.port) + 1).toString();
         this.listen();
       } else {
-        console.error("Unhandled error:", err);
+        console.error("Error no manejado:", err);
       }
     });
   }
@@ -42,7 +50,7 @@ class Server {
   routes() {
     this.app.get("/", (req: Request, res: Response) => {
       res.json({
-        msg: "API Working",
+        msg: "API Funcionando",
       });
     });
 
@@ -59,21 +67,22 @@ class Server {
     });
   }
 
-  midlewares() {
+  middlewares() {
     this.app.use(express.json());
     this.app.use(cors());
   }
 
   async dbConnect() {
     try {
-      await db.authenticate();
-      console.log("Conectados a la BBDD.");
+      await this.db.authenticate();
+      console.log("Conectados a la base de datos.");
 
-      await db.sync({ force: false });
+      await this.db.sync({ force: false });
       console.log("Modelos sincronizados con la base de datos.");
 
       if (process.env.NODE_ENV !== "production") {
         await seedChartData();
+        console.log("Datos de seed insertados en charts.");
       }
     } catch (error) {
       console.error("Error al conectarse a la base de datos:", error);

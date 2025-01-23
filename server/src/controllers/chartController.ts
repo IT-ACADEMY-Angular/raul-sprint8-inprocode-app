@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ChartData from "../models/chart";
+import { ChartData } from "../models/chart";
 
 export const getChartData = async (req: Request, res: Response) => {
   try {

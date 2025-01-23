@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Location from "../models/location";
+import { Location } from "../models/location";
 
 export const getLocations = async (
   req: Request,

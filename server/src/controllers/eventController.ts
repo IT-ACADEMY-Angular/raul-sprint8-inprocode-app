@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Event from "../models/event";
+import { Event } from "../models/event";
 
 export const getEvents = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -71,12 +71,10 @@ export const updateEvent = async (
     const { title, start, allDay, end } = req.body;
 
     if (!title && !start && allDay === undefined && end === undefined) {
-      res
-        .status(400)
-        .json({
-          error:
-            "Se debe proporcionar al menos un campo para actualizar (title, start, allDay o end)",
-        });
+      res.status(400).json({
+        error:
+          "Se debe proporcionar al menos un campo para actualizar (title, start, allDay o end)",
+      });
       return;
     }
 

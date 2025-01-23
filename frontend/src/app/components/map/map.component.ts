@@ -40,7 +40,7 @@ export class MapComponent {
     'Comida y Bebidas': 'restaurant',
     'Transporte y Estacionamiento': 'car',
     Compras: 'shop',
-    Salud: 'defibrillator',
+    Salud: 'hospital',
     'Entretenimiento y Ocio': 'theatre',
     Educación: 'school',
     'Naturaleza y Recreación': 'park',

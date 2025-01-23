@@ -1,10 +1,8 @@
-import ChartData from "../models/chart";
+import { models } from "../models";
 
 const seedChartData = async () => {
   try {
-    console.log("Verificando y actualizando datos iniciales...");
-
-    const initialData = [
+    const data = [
       {
         month: "Enero",
         sales: 500,
@@ -39,34 +37,11 @@ const seedChartData = async () => {
       },
     ];
 
-    const existingData = await ChartData.findAll();
-
-    for (const data of initialData) {
-      const existingEntry = existingData.find(
-        (item) => item.month === data.month
-      );
-
-      if (existingEntry) {
-        const isDifferent =
-          existingEntry.sales !== data.sales ||
-          existingEntry.product !== data.product ||
-          existingEntry.quantity !== data.quantity ||
-          existingEntry.category !== data.category ||
-          existingEntry.percentage !== data.percentage;
-
-        if (isDifferent) {
-          await existingEntry.update(data);
-          console.log(`Datos del mes '${data.month}' actualizados.`);
-        } else {
-          console.log(`Datos del mes '${data.month}' ya están actualizados.`);
-        }
-      } else {
-        await ChartData.create(data);
-        console.log(`Datos del mes '${data.month}' insertados.`);
-      }
-    }
+    await models.ChartData.bulkCreate(data, { ignoreDuplicates: true });
+    console.log("Datos de seed insertados en chart_data.");
   } catch (error) {
-    console.error("Error al poblar o actualizar datos iniciales:", error);
+    console.error("Error al insertar datos de seed en chart_data:", error);
+    throw error;
   }
 };
 
