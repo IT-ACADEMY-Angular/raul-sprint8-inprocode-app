@@ -2,7 +2,12 @@
 
 ## 📄 Descripción
 
-Práctica donde el objetivo principal era hacer una App utilizando los plugins mas importantes y esenciales. CRUD front+back, Maps, Full Calendar, Charts.
+Práctica donde el objetivo principal era hacer una App utilizando los plugins mas importantes y esenciales: 
+
+- CRUD básico
+- MAPS
+- Full Calendar
+- Charts.
 
 ## 📋 Requisitos
 
@@ -10,7 +15,7 @@ Práctica donde el objetivo principal era hacer una App utilizando los plugins m
 - Node instalado en tu sistema.
 - ANGULAR CLI instalado en tu sistema.
 - Visual Studio Code (Recomendado)
-- MySQL Workbench (Recomendado) / PhpMyAdmin + XAMPP
+- MySQL Workbench (Recomendado)
 
 ## 🛠️ Instalación
 
